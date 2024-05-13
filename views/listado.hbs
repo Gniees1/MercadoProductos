@@ -1,0 +1,119 @@
+<link rel="stylesheet" href="/listado.css">
+
+<div class="heading">
+    <h2>Listado de Productos</h2>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>nombre</th>
+            <th>stock</th>
+            <th>precio</th>
+        </tr>
+    </thead>
+    
+    <tbody>
+    {{#each data}}
+    <tr>
+        <td>{{id}}</td>
+        <td>{{name}}</td>
+        <td>{{Stock}}</td>
+        <td>{{Prize}}</td>
+        <td class="btn-group">
+            <!-- Aquí agregamos el enlace con el valor del contador -->
+            
+                <input type="number" value="0" min="0" class="counter" data-id="{{id}}">
+                <button class="btn-sumar" data-id="{{id}}">+</button>
+                <button class="btn-restar" data-id="{{id}}">-</button>
+           
+        </td>
+    </tr>
+    {{/each}}
+</tbody>
+
+</table>
+    
+
+<a href="#" id="carrito" onclick="redirectContact()">
+    <input type="button" value="Agregar al carro" class="btn-editar">
+</a>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const counters = document.querySelectorAll('.counter');
+        const sumarButtons = document.querySelectorAll('.btn-sumar');
+        const restarButtons = document.querySelectorAll('.btn-restar');
+        const carro = document.getElementById("carrito");
+        let arr1 = [];
+
+        // Función para obtener el índice de un producto en arr1
+        function findIndexById(id) {
+            return arr1.findIndex(item => item[0] === id);
+        }
+
+        // Función para sumar al contador
+        function sumarCantidad(id, name) {
+            const counter = document.querySelector('.counter[data-id="' + id + '"]');
+            let valor = parseInt(counter.value);
+            valor++;
+            counter.value = valor;
+            const index = findIndexById(id);
+            if (index !== -1) {
+                arr1[index][2] = valor; // Actualiza el valor de cantidad si el producto ya está en arr1
+            } else {
+                arr1.push([id, name, valor]); // Agrega un nuevo producto a arr1
+            }
+        }
+
+        // Función para restar al contador
+        function restarCantidad(id) {
+            const counter = document.querySelector('.counter[data-id="' + id + '"]');
+            let valor = parseInt(counter.value);
+            if (valor > 0) {
+                valor--;
+                counter.value = valor;
+                const index = findIndexById(id);
+                if (index !== -1) {
+                    arr1[index][2] = valor; // Actualiza el valor de cantidad si el producto ya está en arr1
+                }
+                if (valor === 0) {
+                    arr1.splice(index, 1); // Elimina el producto del arreglo si su cantidad se vuelve cero
+                }
+            }
+        }
+
+        // Asignar eventos a los botones de sumar
+        sumarButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const id = this.getAttribute('data-id');
+                const name = this.parentElement.parentElement.children[1].innerText; // Obtiene el nombre del producto desde la tabla
+                sumarCantidad(id, name);
+            });
+        });
+
+        // Asignar eventos a los botones de restar
+        restarButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const id = this.getAttribute('data-id');
+                restarCantidad(id);
+            });
+        });
+    
+        function redirectContact() {
+                const arr1JSON = JSON.stringify(arr1);
+                // Redirigir a la vista de contacto con arr1 como parámetro de consulta
+                window.location.href = "/contact?arr1=" + encodeURIComponent(arr1JSON);
+        }
+        // Agregar evento al botón "Agregar al carro"
+        carro.addEventListener('click', function () {
+            redirectContact()
+
+        });
+    });
+</script>
+
+
+

@@ -1,0 +1,54 @@
+
+<link rel="stylesheet" href="/contact.css">
+<div class="form-container">
+  <form action="/contact" method="POST">
+    <!-- Agregar campos ocultos para los productos seleccionados -->
+    <input type="hidden" name="productosSeleccionados" id="productosSeleccionados" value="">
+    
+    {{#if sendMessage}} 
+    <div class="alert alert-warning alert-dismissable fade show" role="alert">
+      {{sendMessage}}
+    </div>
+    {{/if}}
+    {{#each arrWarnings}}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{msg}}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {{/each}}
+    <div class="form-group">
+      <label for="name" hidden>Ingrese nombre</label>
+      <input type="text" name="name" id="name" placeholder="Ingrese usuario" class="form-control my-3" {{#if formData.name}}
+      value="{{formData.name}}" {{/if}}>
+    </div>
+    <div class="form-group">
+      <label for="lastName" hidden>Ingrese apellido</label>
+      <input type="text" name="lastName" id="lastName" placeholder="Ingrese apellido" class="form-control my-3" {{#if formData.lastName}} value="{{formData.lastName}}" {{/if}}>
+    </div>
+    <div class="form-group">
+      <label for="email" hidden>Ingrese email</label>
+      <input type="text" name="email" id="email" placeholder="Ingrese email" class="form-control my-3" {{#if formData.email}} value="{{formData.email}}" {{/if}}>
+    </div>
+    <div class="form-group">
+      <label for="message" hidden>Ingrese mensaje</label>
+      <textarea name="message" id="message" cols="30" rows="8"></textarea>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary" type="submit">Enviar</button>
+    </div>
+  </form>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const arr1Param = urlParams.get('arr1');
+    const messageTextarea = document.getElementById('message');
+    if (arr1Param) {
+        // Decodifica el valor JSON de arr1Param
+        const arr1 = JSON.parse(decodeURIComponent(arr1Param));
+        // Actualiza el contenido del textarea con el valor de arr1
+        messageTextarea.value = JSON.stringify(arr1);
+    }
+});
+</script>

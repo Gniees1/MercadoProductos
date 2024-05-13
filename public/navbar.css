@@ -1,0 +1,30 @@
+.navbar {
+    background-color: #f2f2f2; 
+    padding: 10px 0; 
+    width: 100%;
+     
+  }
+  .nav.nav-tabs {
+    width: 100%; 
+    display: flex; 
+    justify-content: center; 
+    background-color: #f2f2f2; 
+    padding: 10px 0; 
+    list-style: none; 
+  }
+  
+  .nav.nav-tabs .nav-item {
+    margin-right: 10px; 
+  }
+  
+  .nav.nav-tabs .nav-link {
+    color: #333; 
+    font-weight: bold; 
+    text-transform: uppercase; 
+    text-decoration: none; 
+  }
+  
+  .nav.nav-tabs .nav-link:hover {
+    color: #007bff; 
+  }
+  

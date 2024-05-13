@@ -1,0 +1,17 @@
+<link rel="stylesheet" href="/login.css">
+
+<div class="container mt-5 text-white">
+
+    <form action="/login" method="POST">
+        <label for="email" hidden>Ingrese email</label>
+        <input type="text" name="email" id="email" placeholder="ingrese email" class="form-control my-3">
+        <label for="password" hidden>Ingrese password</label>
+        <input type="password" name="password" id="password" placeholder="ingrese password" class="form-control my-3">
+        {{#if message}}
+        <div class="alert alert-danger d-flex align-items-center" role="alert">
+            {{message}}
+        </div>
+        {{/if}}
+        <button class="btn btn-primary" type="submit">Login</button>
+    </form>
+</div>

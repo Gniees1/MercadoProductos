@@ -1,0 +1,54 @@
+{{!-- <h1>Bienvenido {{data.email}}</h1>
+<a href="/login/logout">
+    <input class="btn btn-danger" type="button" value="logout">
+</a>
+ --}}
+
+
+<link rel="stylesheet" href="/listado.css">
+
+<h1>Bienvenido {{data.email}}</h1>
+<a href="/login/logout">
+    <input class="btn btn-danger" type="button" value="logout">
+</a>
+
+<div class="heading">
+    <h2>Listado de Productos</h2>
+</div>
+
+<table>
+    <thead>
+        <tr class="btn-group">
+            <th colspan="7">
+                <a href="/profile/addItem">
+                    <input type="button" value="Agregar" class="btn-editar">
+                </a>
+            </th>
+        </tr>
+        <tr>
+            <th>id</th>
+            <th>nombre</th>
+            <th>stock</th>
+            <th>precio</th>
+            <th>imagen</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each data.products}}
+        <tr>
+            <td>{{id}}</td>
+            <td>{{name}}</td>
+            <td>{{Stock}}</td>
+            <td>{{Prize}}</td>
+            <td class="btn-group">
+                <a href="/profile/handleDelete/{{id}}/{{name}}">
+                    <input type="button" value="Borrar" class="btn-borrar">
+                </a>
+                <a href="/profile/editItem/{{id}}">
+                    <input type="button" value="Editar" class="btn-editar">
+                </a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

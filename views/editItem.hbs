@@ -1,0 +1,19 @@
+
+<form action="/profile/editItem" method="POST">
+  <div class="row g-3">
+    <div class="col-sm-7">
+      <input type="text" class="form-control" name="id" value={{product1.id}} placeholder="id" >
+    </div>
+    <div class="col-sm-7">
+      <input type="text" class="form-control" name="name" value={{product1.name}} placeholder="name" >
+    </div>
+    <div class="col-sm-7">
+      <input type="text" class="form-control" name="stock" value={{product1.stock}} placeholder="stock" >
+    </div>
+    <div class="col-sm">
+      <input type="text" class="form-control" name="prize" value={{product1.prize}} placeholder="prize" >
+    </div>
+  </div>
+
+  <button class="btn btn-primary" type="submit">Modificar</button>
+</form>
